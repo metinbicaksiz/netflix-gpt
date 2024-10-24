@@ -37,7 +37,3 @@ export const supportedAI = [
         name: "Gemini",
     }
 ]
-
-export const AI_KEY = "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";
-
-export const geminiApiKey = "AIzaSyCixW1D_tGN_0YkTNbFx_TzSEZGsTaNOuw";

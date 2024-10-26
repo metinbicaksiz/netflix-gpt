@@ -1,11 +1,9 @@
 const aIs = {
-    en: {
-        search:"Search",
-        gptSearchPlaceholder: "OpenAI"
-    },
-    tr: {
-        search:"Ara",
+    gemini: {
         gptSearchPlaceholder: "Gemini"
+    },
+    openAI: {
+        gptSearchPlaceholder: "OpenAI"
     }
 };
 

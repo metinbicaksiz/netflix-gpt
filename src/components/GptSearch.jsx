@@ -7,7 +7,7 @@ const GptSearch = () => {
     return (
         <div>
             <img
-                className="absolute -z-20"
+                className="fixed -z-20"
                 src={BROWSE_BG}
                  alt="bg"/>
             <GptSearchBar/>

@@ -2,15 +2,15 @@ import React, {useRef} from 'react';
 import lang from "../utils/languageConstants";
 import {useDispatch, useSelector} from "react-redux";
 import client from "../utils/openAI";
-import {API_OPTIONS, geminiApiKey, supportedAI} from "../utils/constants";
+import {API_OPTIONS, GEMINI_KEY, supportedAI} from "../utils/constants";
 import {addGptMovieResult} from "../utils/gptSlice";
 import {GoogleGenerativeAI} from "@google/generative-ai";
 import {changeAI} from "../utils/appConfigSlice";
 
 const GptSearchBar = () => {
-    const languageSelected = useSelector(state => state.config.lang);
-    const searchText = useRef(null);
     const dispatch = useDispatch();
+    const searchText = useRef(null);
+    const languageSelected = useSelector(state => state.config.lang);
     const gptType = useSelector(state =>state.config.ai)
 
     const searchMovieTMDB = async (movie) => {
@@ -23,9 +23,9 @@ const GptSearchBar = () => {
     }
 
     const handleSearchClick = async () => {
-        if (gptType === "Gemini") {
+        if (gptType === "gemini") {
             // Gemini
-            const genAI = new GoogleGenerativeAI(geminiApiKey);
+            const genAI = new GoogleGenerativeAI(GEMINI_KEY);
             const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
             const prompt = "Act as a Movie Recommendation System and suggest some movies for the query : " +
@@ -36,7 +36,8 @@ const GptSearchBar = () => {
             const geminiMovies = result.response.candidates[0].content.parts[0].text.split(",");
             const promiseArray = geminiMovies.map(movie => searchMovieTMDB(movie));
             const tmdbResults = await Promise.all(promiseArray);
-            dispatch(addGptMovieResult(tmdbResults));
+            dispatch(addGptMovieResult({movieResults: tmdbResults, movieNames: geminiMovies}));
+
         } else {
             // Open AI
             const gptQuery = "Act as a Movie Recommendation System and suggest some movies for the query : " +

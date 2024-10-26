@@ -1,11 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-
 const appConfigSlice = createSlice({
     name: "appConfig",
     initialState: {
         lang: "en",
-        ai: "open"
+        ai: "gemini"
     },
     reducers: {
         changeLanguage: (state, action) => {

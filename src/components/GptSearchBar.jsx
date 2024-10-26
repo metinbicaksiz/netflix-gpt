@@ -5,12 +5,14 @@ import client from "../utils/openAI";
 import {API_OPTIONS, GEMINI_KEY, supportedAI} from "../utils/constants";
 import {addGptMovieResult} from "../utils/gptSlice";
 import {GoogleGenerativeAI} from "@google/generative-ai";
-import {changeAI} from "../utils/appConfigSlice";
+import {changeAI, changeMovieNumber} from "../utils/appConfigSlice";
+import numberOfMovies from "../utils/numberOfMovieConstant";
 
 const GptSearchBar = () => {
     const dispatch = useDispatch();
     const searchText = useRef(null);
     const languageSelected = useSelector(state => state.config.lang);
+    const movieNumber = useSelector(state => state.config.movieNumber);
     const gptType = useSelector(state =>state.config.ai)
 
     const searchMovieTMDB = async (movie) => {
@@ -30,7 +32,7 @@ const GptSearchBar = () => {
 
             const prompt = "Act as a Movie Recommendation System and suggest some movies for the query : " +
                 searchText.current.value
-                + ". give me names of only five movies, comma separated";
+                + ". give me names of only"+ movieNumber + "movies, comma separated";
 
             const result = await model.generateContent(prompt);
             const geminiMovies = result.response.candidates[0].content.parts[0].text.split(",");
@@ -61,6 +63,10 @@ const GptSearchBar = () => {
         dispatch(changeAI(e.target.value));
     }
 
+    const handleMovieNumber = (e) => {
+        dispatch(changeMovieNumber(e.target.value));
+    }
+
     return (
         <div className="pt-[5%] flex justify-center">
             <form
@@ -71,7 +77,7 @@ const GptSearchBar = () => {
                     ref={searchText}
                     type="text"
                     placeholder={lang[languageSelected].gptSearchPlaceholder}
-                    className="p-6 m-4 col-span-7 text-lg rounded-lg"
+                    className="p-6 m-4 col-span-6 text-lg rounded-lg"
                 />
                 <select
                     className="py-2 px-4 m-4 bg-red-600 text-lg text-white font-bold rounded-md col-span-2"
@@ -87,8 +93,23 @@ const GptSearchBar = () => {
                         ))
                     }
                 </select>
+                <select
+                    className="py-2 px-4 m-4 bg-red-600 text-lg text-white font-bold rounded-md col-span-2"
+                    onChange={handleMovieNumber}
+                >
+                    {
+                        numberOfMovies.map(movie => (
+                            <option
+                                key={movie.identifier}
+                                value={movie.value}
+                            >
+                                {movie.value}
+                            </option>
+                        ))
+                    }
+                </select>
                 <button
-                    className="py-2 px-4 m-4 bg-red-600 text-white font-bold text-lg rounded-lg col-span-3"
+                    className="py-2 px-4 m-4 bg-red-600 text-white font-bold text-lg rounded-lg col-span-2"
                     onClick={handleSearchClick}
                 >
                     {lang[languageSelected].search}

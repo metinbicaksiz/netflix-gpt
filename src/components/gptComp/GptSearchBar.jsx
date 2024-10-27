@@ -1,12 +1,12 @@
 import React, {useRef} from 'react';
-import lang from "../utils/languageConstants";
+import lang from "../../utils/languageConstants";
 import {useDispatch, useSelector} from "react-redux";
-import client from "../utils/openAI";
-import {API_OPTIONS, GEMINI_KEY, supportedAI} from "../utils/constants";
-import {addGptMovieResult} from "../utils/gptSlice";
+import client from "../../utils/openAI";
+import {API_OPTIONS, GEMINI_KEY, supportedAI} from "../../utils/constants";
+import {addGptMovieResult} from "../../slices/gptSlice";
 import {GoogleGenerativeAI} from "@google/generative-ai";
-import {changeAI, changeMovieNumber} from "../utils/appConfigSlice";
-import numberOfMovies from "../utils/numberOfMovieConstant";
+import {changeAI, changeMovieNumber} from "../../slices/appConfigSlice";
+import numberOfMovies from "../../utils/numberOfMovieConstant";
 
 const GptSearchBar = () => {
     const dispatch = useDispatch();
@@ -68,9 +68,9 @@ const GptSearchBar = () => {
     }
 
     return (
-        <div className="pt-[5%] flex justify-center">
+        <div className="pt-[40%] md:pt-[5%] flex justify-center">
             <form
-                className="bg-black w-1/2 grid grid-cols-12 rounded-lg"
+                className="w-full bg-black md:w-1/2 flex flex-col md:grid md:grid-cols-12 rounded-lg"
                 onSubmit={e => {e.preventDefault()}}
             >
                 <input
@@ -80,21 +80,21 @@ const GptSearchBar = () => {
                     className="p-6 m-4 col-span-6 text-lg rounded-lg"
                 />
                 <select
-                    className="py-2 px-4 m-4 bg-red-600 text-lg text-white font-bold rounded-md col-span-2"
+                    className="py-2 px-4 m-4 bg-red-600 text-lg text-center text-white font-bold rounded-md col-span-2"
                     onChange={handleAiChange}
                 >
                     {
                         supportedAI.map(ai => (
                             <option
                                 key={ai.identifier}
-                                value={ai.name}
+                                value={ai.identifier}
                                 className="hover:bg-amber-200"
                             >{ai.name}</option>
                         ))
                     }
                 </select>
                 <select
-                    className="py-2 px-4 m-4 bg-red-600 text-lg text-white font-bold rounded-md col-span-2"
+                    className="py-2 px-4 m-4 bg-red-600 text-lg text-center text-white font-bold rounded-md col-span-2"
                     onChange={handleMovieNumber}
                 >
                     {
@@ -109,7 +109,7 @@ const GptSearchBar = () => {
                     }
                 </select>
                 <button
-                    className="py-2 px-4 m-4 bg-red-600 text-white font-bold text-lg rounded-lg col-span-2"
+                    className="py-2 px-4 m-4 bg-red-600 text-white text-center font-bold text-lg rounded-lg col-span-2"
                     onClick={handleSearchClick}
                 >
                     {lang[languageSelected].search}

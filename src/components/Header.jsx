@@ -4,10 +4,10 @@ import { auth } from "../utils/firebase";
 import {onAuthStateChanged, signOut} from "firebase/auth";
 import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {addUser, removeUser} from "../utils/userSlice";
-import {toggleGptSearchView} from "../utils/gptSlice";
+import {addUser, removeUser} from "../slices/userSlice";
+import {toggleGptSearchView} from "../slices/gptSlice";
 import {SUPPORTED_LANGUAGES} from "../utils/constants";
-import {changeLanguage} from "../utils/appConfigSlice";
+import {changeLanguage} from "../slices/appConfigSlice";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -52,13 +52,13 @@ const Header = () => {
     }
 
     return (
-        <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
+        <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
             <Link to={"/"}>
-                <img src={logo} className="w-44" alt="logo"/>
+                <img src={logo} className="w-44 mx-auto md:mx-0" alt="logo"/>
             </Link>
             {
                 user &&
-                (<div className="flex p-2 items-center">
+                (<div className="flex p-2 justify-between items-center">
                     {(
                         showGpt &&
                         <select
@@ -84,7 +84,7 @@ const Header = () => {
                         }
                     </button>
                     <img
-                        className="w-12 h-12 rounded-md"
+                        className="hidden md:block w-12 h-12 rounded-md"
                         src={user?.photoURL}
                         alt="user icon"/>
                     <button

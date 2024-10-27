@@ -4,7 +4,7 @@ import {IMAGE_URL} from "../utils/constants";
 const MovieCard = ({posterPath}) => {
     if (!posterPath) return null;
     return (
-        <div className="pr-4 w-48">
+        <div className="pr-4 md:w-48 w-40">
             <img className="rounded-md"
                 src={IMAGE_URL + posterPath}
                 alt="Movie Poster"

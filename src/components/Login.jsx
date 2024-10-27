@@ -4,7 +4,7 @@ import {checkValidDataSignUp, checkValidDataSignIn} from "../utils/validate";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import {useDispatch} from "react-redux";
-import {addUser} from "../utils/userSlice";
+import {addUser} from "../slices/userSlice";
 import {BROWSE_BG, USER_AVATAR} from "../utils/constants";
 
 const Login = () => {
@@ -87,12 +87,13 @@ const Login = () => {
         <>
             <Header />
             <div className="absolute m-0">
-                <img src={BROWSE_BG}
+                <img className="h-screen object-cover md:w-screen"
+                     src={BROWSE_BG}
                      alt="bg"/>
             </div>
             <form
                 onSubmit={(e) => e.preventDefault()}
-                className="p-12 absolute w-1/4 bg-black bg-opacity-75 my-36 mx-auto right-0 left-0 text-white rounded-md">
+                className="p-12 absolute w-3/4 md:w-1/4 bg-black bg-opacity-75 my-36 mx-auto right-0 left-0 text-white rounded-md">
                 <h1 className="font-bold text-3xl py-5 text-left">
                     {loginState ? "Sign In" : "Sign Up"}
                 </h1>

@@ -5,7 +5,7 @@ const appConfigSlice = createSlice({
     initialState: {
         lang: "en",
         ai: "gemini",
-        movieNumber: 5
+        movieNumber: 1
     },
     reducers: {
         changeLanguage: (state, action) => {

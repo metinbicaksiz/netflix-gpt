@@ -32,7 +32,7 @@ const GptSearchBar = () => {
 
             const prompt = "Act as a Movie Recommendation System and suggest some movies for the query : " +
                 searchText.current.value
-                + ". give me names of only"+ movieNumber + "movies, comma separated";
+                + ". give me names of only"+ movieNumber +"movies, comma separated";
 
             const result = await model.generateContent(prompt);
             const geminiMovies = result.response.candidates[0].content.parts[0].text.split(",");
@@ -44,7 +44,7 @@ const GptSearchBar = () => {
             // Open AI
             const gptQuery = "Act as a Movie Recommendation System and suggest some movies for the query : " +
                 searchText.current.value
-                + ". give me names of only five movies, comma separated";
+                + ". give me names of only"+ movieNumber +"movies, comma separated";
 
             const gptResults = await client.chat.completions.create({
                 messages: [{ role: 'user', content: searchText.current.value }],

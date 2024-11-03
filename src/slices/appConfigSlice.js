@@ -5,7 +5,8 @@ const appConfigSlice = createSlice({
     initialState: {
         lang: "en",
         ai: "gemini",
-        movieNumber: 1
+        movieNumber: 1,
+        openModal: false
     },
     reducers: {
         changeLanguage: (state, action) => {
@@ -16,10 +17,13 @@ const appConfigSlice = createSlice({
         },
         changeMovieNumber: (state, action) => {
             state.movieNumber = action.payload;
+        },
+        changeOpenModal: (state, action) => {
+            state.openModal = action.payload;
         }
     }
 })
 
-export const {changeLanguage, changeAI, changeMovieNumber} = appConfigSlice.actions;
+export const {changeLanguage, changeAI, changeMovieNumber, changeOpenModal} = appConfigSlice.actions;
 
 export default appConfigSlice.reducer;

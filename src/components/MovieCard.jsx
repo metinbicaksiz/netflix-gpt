@@ -12,10 +12,10 @@ const MovieCard = ({movieId, posterPath}) => {
     const openModal = async () => {
         dispatch(changeOpenModal(!modal));
         const data = await fetch(`https://api.themoviedb.org/3/movie/
-            ${movieId}`, API_OPTIONS);
-        const json = await data.json();
+            ${movieId}`, API_OPTIONS)
+            .then(response => response.json())
+            .then(json => dispatch(changeSelectedMovie(json)));
         dispatch(changeSelectedMovieId(movieId));
-        dispatch(changeSelectedMovie(json));
     }
 
     if (!posterPath) return null;

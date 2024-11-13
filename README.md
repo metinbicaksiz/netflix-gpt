@@ -1,4 +1,5 @@
 Netflix GPT
+
     Create React App
     Configured TailwindCSS
     Header
@@ -48,6 +49,7 @@ Netflix GPT
     Made our Site Responsive
 
 Features
+
     Login/Sign Up
     Sign In /Sign up Form
     redirect to Browse Page
@@ -63,4 +65,7 @@ Features
     Movie Suggestions
 
 Project Setup
+
     Before starting the project please add .env file and add TMDB and OPENAI KEY into it.
+
+[Demo Link](http:metin.bicaksiz.com)
